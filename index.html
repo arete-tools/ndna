@@ -1291,8 +1291,10 @@ function showScreen(screenId) {
 function reportHeight() {
   if (!isIframe) return;
   var h = document.body.scrollHeight;
-  // Grow-only during question flow
-  if (document.getElementById('screen-assessment').classList.contains('active')) {
+  // Grow-only during question flow AND results reveal (prevents shrink-then-grow jitter)
+  var assessmentActive = document.getElementById('screen-assessment').classList.contains('active');
+  var resultsActive = document.getElementById('screen-results').classList.contains('active');
+  if (assessmentActive || resultsActive) {
     if (h > maxBodyHeight) maxBodyHeight = h;
     h = maxBodyHeight;
   } else {

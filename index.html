@@ -46,11 +46,11 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   color: var(--text-body);
   background: var(--bg-dark);
   line-height: 1.6;
-  min-height: 520px;
+  min-height: 680px;
 }
 
 /* ============================================
@@ -67,7 +67,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 520px;
+  min-height: 680px;
   padding: 40px 20px;
 }
 
@@ -141,36 +141,94 @@ body {
 .assessment-container {
   max-width: 640px;
   width: 100%;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 32px 32px 24px;
+}
+
+.topbar {
+  padding: 0 0 16px;
+  margin-bottom: 24px;
+  border-bottom: 3px solid var(--accent);
+}
+
+.topbar-title {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  font-size: 0.875rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .progress-area {
   margin-bottom: 48px;
 }
 
-.progress-label {
+.progress-counter {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.progress-number {
   font-family: var(--font-ui);
-  font-weight: 400;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  min-width: 72px;
   text-align: center;
-  margin-bottom: 12px;
-  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.progress-number span {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.progress-right {
+  flex: 1;
+}
+
+.progress-dim {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--accent);
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
 }
 
-.progress-track {
-  width: 100%;
-  height: 3px;
+.progress-pips {
+  display: flex;
+  gap: 4px;
+}
+
+.progress-pip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
+  transition: all 0.25s ease;
 }
 
-.progress-fill {
-  height: 100%;
+.progress-pip.done {
   background: var(--accent);
-  border-radius: 2px;
-  transition: width 0.3s ease;
+}
+
+.progress-pip.active {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(38, 69, 80, 0.15);
+}
+
+.progress-pip.dim-gap {
+  margin-left: 8px;
 }
 
 .question-area {
@@ -179,8 +237,8 @@ body {
 }
 
 .question-text {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
+  font-family: var(--font-ui);
+  font-size: 1.375rem;
   color: #000000;
   line-height: 1.7;
   margin-bottom: 40px;
@@ -231,7 +289,7 @@ body {
 }
 
 .back-btn {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-weight: 400;
   font-size: 0.9375rem;
   color: var(--text-muted);
@@ -450,7 +508,7 @@ body {
 }
 
 .gate-prompt {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 1rem;
   color: var(--text-body);
   line-height: 1.6;
@@ -659,7 +717,7 @@ body {
 }
 
 .cta-primary-copy {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   color: var(--text-body);
   line-height: 1.6;
@@ -694,7 +752,7 @@ body {
 .cta-secondary {
   display: none; /* Hidden until org instrument is live */
   padding: 16px 0;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.9rem;
   color: var(--text-muted);
 }
@@ -728,6 +786,11 @@ body {
 @media (max-width: 600px) {
   .screen.active {
     padding: 32px 16px;
+    min-height: 520px;
+  }
+
+  .assessment-container {
+    padding: 24px 16px 20px;
   }
 
   .intro-headline {
@@ -736,6 +799,24 @@ body {
 
   .intro-body {
     font-size: 1rem;
+  }
+
+  .question-text {
+    font-size: 1.125rem;
+  }
+
+  .progress-number {
+    font-size: 2.25rem;
+    min-width: 56px;
+  }
+
+  .progress-pip {
+    width: 6px;
+    height: 6px;
+  }
+
+  .progress-dim-gap {
+    margin-left: 6px;
   }
 
   .results-header,
@@ -880,10 +961,16 @@ body {
 <div id="screen-assessment" class="screen" role="main" aria-label="Assessment questions">
   <div class="assessment-screen-inner">
     <div class="assessment-container">
+      <div class="topbar">
+        <span class="topbar-title">Negotiation DNA &middot; Personal Profile</span>
+      </div>
       <div class="progress-area">
-        <div class="progress-label" id="progress-label" aria-live="polite">Question 1 of 15</div>
-        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="1">
-          <div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
+        <div class="progress-counter">
+          <div class="progress-number" id="progress-number"></div>
+          <div class="progress-right">
+            <div class="progress-dim" id="progress-dim"></div>
+            <div class="progress-pips" id="progress-pips" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="1"></div>
+          </div>
         </div>
       </div>
       <div class="question-area">
@@ -1204,10 +1291,8 @@ function showScreen(screenId) {
 function reportHeight() {
   if (!isIframe) return;
   var h = document.body.scrollHeight;
-  // Grow-only during question flow AND results reveal (prevents shrink-then-grow jitter)
-  var assessmentActive = document.getElementById('screen-assessment').classList.contains('active');
-  var resultsActive = document.getElementById('screen-results').classList.contains('active');
-  if (assessmentActive || resultsActive) {
+  // Grow-only during question flow
+  if (document.getElementById('screen-assessment').classList.contains('active')) {
     if (h > maxBodyHeight) maxBodyHeight = h;
     h = maxBodyHeight;
   } else {
@@ -1268,11 +1353,22 @@ setTimeout(function() {
    ============================================ */
 function renderQuestion() {
   var item = ITEMS[currentQuestion];
-  var progressPct = ((currentQuestion + 1) / ITEMS.length) * 100;
 
-  document.getElementById('progress-label').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + ITEMS.length;
-  document.getElementById('progress-fill').style.width = progressPct + '%';
-  document.querySelector('.progress-track').setAttribute('aria-valuenow', currentQuestion + 1);
+  // Update progress counter and pips
+  document.getElementById('progress-number').innerHTML = (currentQuestion + 1) + '<span> /' + ITEMS.length + '</span>';
+  document.getElementById('progress-dim').textContent = DIMENSIONS[item.dim].name;
+
+  var pipsHtml = '';
+  for (var i = 0; i < ITEMS.length; i++) {
+    var cls = 'progress-pip';
+    if (i > 0 && i % 5 === 0) cls += ' dim-gap';
+    if (i < currentQuestion) cls += ' done';
+    else if (i === currentQuestion) cls += ' active';
+    pipsHtml += '<div class="' + cls + '"></div>';
+  }
+  document.getElementById('progress-pips').innerHTML = pipsHtml;
+  document.getElementById('progress-pips').setAttribute('aria-valuenow', currentQuestion + 1);
+
   document.getElementById('question-text').textContent = item.text;
 
   // Back button visibility

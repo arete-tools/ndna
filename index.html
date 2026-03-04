@@ -1083,6 +1083,7 @@ let scores = {};
 let bands = {};
 let selectedHeadlineId = '';
 let maxBodyHeight = 0;
+let suppressHeightReport = false;
 
 /* ============================================
    SCORING FUNCTIONS
@@ -1202,7 +1203,7 @@ function showScreen(screenId) {
    IFRAME HEIGHT REPORTING
    ============================================ */
 function reportHeight() {
-  if (!isIframe) return;
+  if (!isIframe || suppressHeightReport) return;
   var h = document.body.scrollHeight;
   // Grow-only during question flow
   if (document.getElementById('screen-assessment').classList.contains('active')) {
@@ -1516,12 +1517,16 @@ function buildCTA() {
    EMAIL GATE LOGIC
    ============================================ */
 function revealFullResults(fromEmail) {
+  // Suppress interval-based height reporting during transition
+  suppressHeightReport = true;
+
   // Hide gate
   document.getElementById('gate-section').style.display = 'none';
 
   if (selectedHeadlineId === 'H12') {
     // Show balanced block (already visible from buildSummaries), skip dimension summaries
     document.getElementById('cta-section').classList.add('revealed');
+    suppressHeightReport = false;
     reportHeight();
   } else {
     // Pre-measure fully expanded height to prevent iframe jitter on card expand
@@ -1554,6 +1559,9 @@ function revealFullResults(fromEmail) {
       document.getElementById('cta-section').classList.remove('revealed');
       preSummaries.classList.remove('revealed');
     }
+
+    // Re-enable height reporting before staggered reveal
+    suppressHeightReport = false;
 
     // Now proceed with the normal staggered reveal
     var summariesSection = document.getElementById('summaries-section');

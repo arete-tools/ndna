@@ -950,6 +950,21 @@ body.in-iframe #questions { min-height: 520px; }
   // ---- IFRAME ----
 
   var isIframe = window.self !== window.top;
+  var heightFloor = 0;
+
+  function postHeight() {
+    var h = Math.max(document.body.offsetHeight, document.body.scrollHeight);
+    if (isIframe) {
+      if (h > heightFloor) {
+        heightFloor = h;
+      } else {
+        h = heightFloor;
+      }
+      try {
+        window.parent.postMessage({ type: 'ndna-height', height: h }, '*');
+      } catch (e) {}
+    }
+  }
 
   if (isIframe) {
     document.body.classList.add('in-iframe');
@@ -957,12 +972,7 @@ body.in-iframe #questions { min-height: 520px; }
     try {
       window.parent.postMessage({ type: 'ndna-init', transition: 'height 0.3s ease' }, '*');
     } catch (e) {}
-    setInterval(function() {
-      var h = Math.max(document.body.offsetHeight, document.body.scrollHeight);
-      try {
-        window.parent.postMessage({ type: 'ndna-height', height: h }, '*');
-      } catch (e) {}
-    }, 300);
+    setInterval(postHeight, 300);
   }
 
   // ---- PIPS ----
@@ -1016,7 +1026,12 @@ body.in-iframe #questions { min-height: 520px; }
     }
     document.getElementById(id).classList.add('active');
     elProgressBar.classList.toggle('visible', id === 'questions');
+    // Reset height floor for short screens so iframe can shrink
+    if (id === 'intro' || id === 'loading') {
+      heightFloor = 0;
+    }
     window.scrollTo(0, 0);
+    postHeight();
   }
 
   // ---- QUESTIONS ----
@@ -1285,6 +1300,40 @@ body.in-iframe #questions { min-height: 520px; }
     // Now hide gate in the same synchronous block
     elGateSection.style.display = 'none';
 
+    // Also render CTA into DOM (hidden, but present for measurement)
+    renderCTA();
+
+    // Pre-calculate height with all cards expanded BEFORE stagger animation
+    // This sets the heightFloor so no individual card expansion triggers a scrollbar
+    if (isIframe) {
+      var summaryCards = elSummariesSection.querySelectorAll('.summary-card');
+      // Temporarily disable animations during measurement
+      var noAnim = document.createElement('style');
+      noAnim.textContent = '* { animation: none !important; transition: none !important; }';
+      document.head.appendChild(noAnim);
+      // Make all cards visible and expanded for measurement
+      summaryCards.forEach(function(c) {
+        c.classList.add('revealed');
+        c.classList.add('expanded');
+      });
+      elCtaSection.classList.add('visible');
+      resultsCard.style.minHeight = '';
+      void document.body.offsetHeight; // force sync layout
+      var h = Math.max(document.body.offsetHeight, document.body.scrollHeight);
+      heightFloor = h + 20; // buffer for rounding
+      postHeight();
+      // Collapse and un-reveal cards
+      summaryCards.forEach(function(c) {
+        c.classList.remove('revealed');
+        c.classList.remove('expanded');
+      });
+      elCtaSection.classList.remove('visible');
+      resultsCard.style.minHeight = lockedH + 'px';
+      // Re-enable animations
+      document.head.removeChild(noAnim);
+      void document.body.offsetHeight; // force layout before animations start
+    }
+
     // Release the height lock after one frame so layout settles naturally
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
@@ -1302,9 +1351,8 @@ body.in-iframe #questions { min-height: 520px; }
       })(cards[i], i * 50);
     }
 
-    // CTA
+    // CTA (already rendered, just reveal it)
     setTimeout(function() {
-      renderCTA();
       elCtaSection.classList.add('visible');
     }, cards.length * 50 + 100);
   }
@@ -1446,6 +1494,7 @@ body.in-iframe #questions { min-height: 520px; }
     bands = {};
     selectedHeadline = '';
     questionHeightLocked = false;
+    heightFloor = 0;
     elSummariesSection.classList.remove('visible');
     elCtaSection.classList.remove('visible');
     elBalancedBlock.classList.remove('visible');
@@ -1455,6 +1504,7 @@ body.in-iframe #questions { min-height: 520px; }
     elGateSection.style.display = '';
     elGateEmail.value = '';
     showSection('intro');
+    postHeight();
   });
 
   // ---- INIT ----

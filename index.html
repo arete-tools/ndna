@@ -693,6 +693,7 @@ body {
 }
 
 /* iframe override */
+body.in-iframe { overflow: hidden; }
 body.in-iframe #questions { min-height: 520px; }
 
 /* Reduced motion */
@@ -1455,6 +1456,8 @@ body.in-iframe #questions { min-height: 520px; }
           var isExpanded = card.classList.contains('expanded');
           card.classList.toggle('expanded');
           header.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+          // Immediate height report so iframe resizes without waiting for 300ms interval
+          requestAnimationFrame(function() { postHeight(); });
         });
         header.addEventListener('keydown', function(e) {
           if (e.key === 'Enter' || e.key === ' ') {

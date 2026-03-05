@@ -139,7 +139,7 @@ body {
    SCREEN 2: ASSESSMENT
    ============================================ */
 .assessment-container {
-  max-width: 640px;
+  max-width: 720px;
   width: 100%;
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -215,7 +215,7 @@ body {
 
 .question-area {
   text-align: center;
-  min-height: 200px;
+  min-height: 260px;
 }
 
 .question-text {
@@ -341,7 +341,7 @@ body {
    SCREEN 4-6: RESULTS
    ============================================ */
 .results-container {
-  max-width: 640px;
+  max-width: 720px;
   width: 100%;
 }
 
@@ -349,7 +349,7 @@ body {
   background: var(--bg-card);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .results-header {
@@ -360,7 +360,7 @@ body {
 .results-label {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -369,7 +369,7 @@ body {
 
 .headline-text {
   font-family: var(--font-ui);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   color: var(--text-heading);
   line-height: 1.6;
   font-weight: 700;
@@ -393,7 +393,7 @@ body {
 .chart-dim-name {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--text-heading);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -471,7 +471,7 @@ body {
 .chart-label-right {
   font-family: var(--font-ui);
   font-weight: 400;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-body);
   max-width: 45%;
   line-height: 1.3;
@@ -623,14 +623,14 @@ body {
 .summary-dim-name {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--text-heading);
 }
 
 .summary-band-label {
   font-family: var(--font-ui);
   font-weight: 400;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -659,7 +659,7 @@ body {
 
 .summary-copy {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1.0625rem;
   color: var(--text-body);
   line-height: 1.7;
 }
@@ -679,7 +679,7 @@ body {
 
 .balanced-copy {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1.0625rem;
   color: var(--text-body);
   line-height: 1.7;
 }
@@ -700,7 +700,7 @@ body {
 
 .cta-primary-copy {
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-body);
   line-height: 1.6;
   margin-bottom: 20px;
@@ -810,12 +810,12 @@ body {
   }
 
   .headline-text {
-    font-size: 1.1rem;
+    font-size: 1.125rem;
   }
 
   .chart-label-left,
   .chart-label-right {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -1284,7 +1284,7 @@ if (isIframe) {
    ============================================ */
 document.getElementById('btn-start').addEventListener('click', function() {
   showScreen('screen-assessment');
-  setTimeout(function() { renderQuestion(); }, 350);
+  setTimeout(function() { lockQuestionHeight(); renderQuestion(); }, 350);
 });
 
 // Set initial visibility
@@ -1351,6 +1351,47 @@ function renderQuestion() {
   });
 
   reportHeight();
+}
+
+function lockQuestionHeight() {
+  // Render all questions invisibly, find tallest, lock question-area to that height.
+  // Prevents iframe resize between questions.
+  var area = document.querySelector('.question-area');
+  if (!area) return;
+  var savedQ = currentQuestion;
+  var maxH = 0;
+
+  // Temporarily make screen visible but off-screen for measurement
+  var screen = document.getElementById('screen-assessment');
+  var wasActive = screen.classList.contains('active');
+  screen.style.position = 'absolute';
+  screen.style.visibility = 'hidden';
+  screen.style.display = 'flex';
+
+  for (var i = 0; i < ITEMS.length; i++) {
+    currentQuestion = i;
+    var item = ITEMS[i];
+    document.getElementById('question-text').textContent = item.text;
+    var grid = document.getElementById('options-grid');
+    grid.innerHTML = '';
+    RESPONSE_OPTIONS.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      grid.appendChild(btn);
+    });
+    var h = area.offsetHeight;
+    if (h > maxH) maxH = h;
+  }
+
+  // Restore
+  screen.style.position = '';
+  screen.style.visibility = '';
+  if (!wasActive) screen.style.display = '';
+  currentQuestion = savedQ;
+
+  // Lock with a small buffer
+  area.style.minHeight = (maxH + 8) + 'px';
 }
 
 function selectOption(itemId, optionLabel, btnEl) {

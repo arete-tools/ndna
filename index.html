@@ -15,13 +15,13 @@
   --bg-dark: #F8F7F4;
   --bg-card: #FFFFFF;
   --accent: #264550;
-  --accent-light: rgba(38, 69, 80, 0.18);
+  --accent-light: rgba(38, 69, 80, 0.1);
   --accent-mid: rgba(38, 69, 80, 0.5);
   --text-body: #4d4d4f;
   --text-heading: #000000;
   --text-muted: #888888;
   --border: #d1d3d4;
-  --bar-track: #d8dadc;
+  --bar-track: #e8e9ea;
   --radius: 8px;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
@@ -43,11 +43,10 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 body {
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   color: var(--text-body);
   background: var(--bg-dark);
   line-height: 1.6;
@@ -70,10 +69,6 @@ body {
   justify-content: center;
   min-height: 680px;
   padding: 40px 20px;
-}
-
-#screen-results.active {
-  justify-content: flex-start;
 }
 
 .screen.visible {
@@ -99,7 +94,7 @@ body {
 }
 
 .intro-body {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 1.125rem;
   color: var(--text-body);
   line-height: 1.7;
@@ -148,93 +143,75 @@ body {
   width: 100%;
   background: var(--bg-card);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  padding: 32px 32px 24px;
-}
-
-.topbar {
-  padding: 0 0 16px;
-  margin-bottom: 24px;
-  border-bottom: 3px solid var(--accent);
-}
-
-.topbar-title {
-  font-family: var(--font-ui);
-  font-weight: 900;
-  font-size: 0.875rem;
-  color: var(--accent);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  box-shadow: var(--shadow-md);
+  padding: 32px;
 }
 
 .progress-area {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
-
+.progress-topbar {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-bottom: 16px;
+}
 .progress-counter {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
 }
-
-.progress-number {
+.progress-num {
   font-family: var(--font-ui);
-  font-size: 3rem;
   font-weight: 900;
-  color: var(--accent);
+  font-size: 2.25rem;
+  color: var(--text-heading);
   line-height: 1;
-  letter-spacing: -0.03em;
-  min-width: 72px;
-  text-align: center;
-  transition: all 0.2s ease;
 }
-
-.progress-number span {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0;
-}
-
-.progress-right {
-  flex: 1;
-}
-
-.progress-dim {
+.progress-of {
   font-family: var(--font-ui);
-  font-size: 0.75rem;
-  font-weight: 900;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
-
+.progress-dim-label {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.03em;
+  margin-bottom: 14px;
+  min-height: 1.2em;
+}
 .progress-pips {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+.progress-pip-group {
   display: flex;
   gap: 4px;
 }
-
 .progress-pip {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--border);
-  transition: all 0.25s ease;
+  transition: background 0.2s ease;
 }
-
-.progress-pip.done {
-  background: var(--accent);
-}
-
 .progress-pip.active {
   background: var(--accent);
-  box-shadow: 0 0 0 3px rgba(38, 69, 80, 0.15);
 }
-
-.progress-pip.dim-gap {
-  margin-left: 8px;
-}
+.progress-label { display: none; }
+.progress-track { display: none; }
+.progress-fill { display: none; }
 
 .question-area {
   text-align: center;
@@ -245,7 +222,7 @@ body {
   font-family: var(--font-ui);
   font-size: 1.375rem;
   color: #000000;
-  line-height: 1.7;
+  line-height: 1.6;
   margin-bottom: 40px;
   max-width: 520px;
   margin-left: auto;
@@ -452,11 +429,11 @@ body {
 
 .chart-bar-center-line {
   position: absolute;
-  top: -2px;
-  bottom: -2px;
+  top: 0;
+  bottom: 0;
   left: 50%;
   width: 1px;
-  background: #b8babc;
+  background: var(--border);
   z-index: 2;
 }
 
@@ -757,7 +734,7 @@ body {
 .cta-secondary {
   display: none; /* Hidden until org instrument is live */
   padding: 16px 0;
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--text-muted);
 }
@@ -793,35 +770,14 @@ body {
     padding: 32px 16px;
     min-height: 520px;
   }
-
-  .assessment-container {
-    padding: 24px 16px 20px;
-  }
-
+  body { min-height: 520px; }
+  .question-text { font-size: 1.125rem; }
+  .assessment-container { padding: 24px 16px; }
   .intro-headline {
     font-size: 1.6rem;
   }
-
   .intro-body {
     font-size: 1rem;
-  }
-
-  .question-text {
-    font-size: 1.125rem;
-  }
-
-  .progress-number {
-    font-size: 2.25rem;
-    min-width: 56px;
-  }
-
-  .progress-pip {
-    width: 6px;
-    height: 6px;
-  }
-
-  .progress-dim-gap {
-    margin-left: 6px;
   }
 
   .results-header,
@@ -953,8 +909,8 @@ body {
      ============================================ -->
 <div id="screen-intro" class="screen active" role="main">
   <div class="intro-content">
-    <h1 class="intro-headline" id="intro-headline">What are your negotiation patterns?</h1>
-    <p class="intro-body">Everyone who negotiates commercially has default patterns. How you prepare, how you handle pressure, how you make concessions, and how you balance the deal against internal stakeholders. This diagnostic maps yours across five dimensions so you can see what your counterparties already see.</p>
+    <h1 class="intro-headline" id="intro-headline">Where do you leak value?</h1>
+    <p class="intro-body">Every commercial interaction reveals patterns. Some of those patterns create value. Others give it away. The problem is that predictable patterns are exploitable patterns, and most people cannot see their own.</p>
     <p class="intro-meta">15 questions. About 3 minutes. No right answers.</p>
     <button class="btn-primary" id="btn-start" aria-label="Begin the assessment">Begin</button>
   </div>
@@ -966,17 +922,20 @@ body {
 <div id="screen-assessment" class="screen" role="main" aria-label="Assessment questions">
   <div class="assessment-screen-inner">
     <div class="assessment-container">
-      <div class="topbar">
-        <span class="topbar-title">Negotiation DNA &middot; Personal Profile</span>
-      </div>
       <div class="progress-area">
+        <div class="progress-topbar">Negotiation DNA &middot; Personal Profile</div>
         <div class="progress-counter">
-          <div class="progress-number" id="progress-number"></div>
-          <div class="progress-right">
-            <div class="progress-dim" id="progress-dim"></div>
-            <div class="progress-pips" id="progress-pips" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="1"></div>
-          </div>
+          <span class="progress-num" id="progress-num">1</span>
+          <span class="progress-of">of 15</span>
         </div>
+        <div class="progress-dim-label" id="progress-dim-label"></div>
+        <div class="progress-pips">
+          <div class="progress-pip-group" id="pip-group-0"></div>
+          <div class="progress-pip-group" id="pip-group-1"></div>
+          <div class="progress-pip-group" id="pip-group-2"></div>
+        </div>
+        <div id="progress-label" style="display:none" aria-live="polite"></div>
+        <div style="display:none"><div id="progress-fill"></div></div>
       </div>
       <div class="question-area">
         <p class="question-text" id="question-text"></p>
@@ -993,7 +952,7 @@ body {
      ============================================ -->
 <div id="screen-processing" class="screen" role="main" aria-label="Processing results">
   <div class="processing-content">
-    <p class="processing-text">Building your profile...</p>
+    <p class="processing-text">Analyzing your behavioral patterns...</p>
     <div class="processing-dots" aria-hidden="true">
       <div class="processing-dot"></div>
       <div class="processing-dot"></div>
@@ -1021,7 +980,7 @@ body {
 
       <!-- Email Gate -->
       <div class="gate-section" id="gate-section">
-        <p class="gate-prompt">The chart above is the overview. The full breakdown shows what each dimension means in practice and where your specific patterns have the most commercial impact.</p>
+        <p class="gate-prompt">The chart shows where your patterns sit. What follows is what those patterns cost you, and where the specific exposure is for each dimension.</p>
         <form class="gate-form" id="gate-form" novalidate>
           <input type="email" class="gate-email-input" id="gate-email" placeholder="Email address" aria-label="Email address" required>
           <button type="submit" class="gate-submit-btn"><span class="gate-btn-label">Next step</span>Show Breakdown</button>
@@ -1031,7 +990,7 @@ body {
 
       <!-- Balanced Profile Block (shown only for H12) -->
       <div class="balanced-block" id="balanced-block">
-        <p class="balanced-copy">No single dimension dominates your profile. That can mean genuine versatility, or it can mean your patterns shift depending on the situation, the stakes, or who you are dealing with. The question worth sitting with: do you choose when to flex, or does the situation choose for you?</p>
+        <p class="balanced-copy">Your profile shows no single dimension creating obvious exposure. Balanced profiles often mask situational inconsistency: the patterns may shift depending on the stakes, the counterparty, or the internal pressure you face. The diagnostic value for balanced profiles lies in identifying the specific conditions under which your balance breaks down.</p>
       </div>
 
       <!-- Dimension Summaries -->
@@ -1077,13 +1036,13 @@ const ITEMS = [
   { id: '3.1', dim: 'D3', text: "When the other party issues a take-it-or-leave-it demand, I hold my position rather than offering a concession to keep things moving." },
   { id: '4.1', dim: 'D4', text: "When I make a concession, I explicitly state what I expect in return before finalizing it." },
   { id: '5.1', dim: 'D5', text: "Before making commitments to the other party, I check with internal colleagues to confirm I have support for the terms I'm considering." },
-  { id: '1.2', dim: 'D1', text: "When preparation time is limited, I rely on my read of the situation rather than conducting structured research on the other party." },
-  { id: '2.2', dim: 'D2', text: "In commercial discussions, my primary focus is securing the best outcome for my side rather than expanding what's available to both parties." },
+  { id: '1.2', dim: 'D1', text: "When preparation time is limited, I rely on my read of the situation and past experience rather than conducting structured research on the other party." },
+  { id: '2.2', dim: 'D2', text: "My primary focus in any commercial discussion is securing the best possible outcome for my side, rather than looking for ways to expand what's available to both parties." },
   { id: '3.2', dim: 'D3', text: "When a high-stakes discussion becomes heated and the relationship feels at risk, I soften my position on key issues to protect the relationship." },
   { id: '4.2', dim: 'D4', text: "When a discussion loses momentum, I offer a concession to get things moving again, even if the other party hasn't made a comparable move." },
   { id: '5.2', dim: 'D5', text: "I focus on reaching the best possible agreement with the other party and manage internal buy-in afterward." },
   { id: '1.3', dim: 'D1', text: "I test my assumptions about the other party's priorities by seeking information from multiple sources before engaging with them directly." },
-  { id: '2.5', dim: 'D2', text: "I propose trades that give the other party something they value in exchange for something I need, rather than splitting differences." },
+  { id: '2.5', dim: 'D2', text: "I propose options that give the other party something they value in exchange for something I need, rather than splitting differences on the contested terms." },
   { id: '3.3', dim: 'D3', text: "When someone applies time pressure to force a quick decision, I slow the process down rather than accelerating to meet their timeline." },
   { id: '4.5', dim: 'D4', text: "I keep a running account of concessions made by both sides during a discussion and raise it when the balance becomes lopsided." },
   { id: '5.3', dim: 'D5', text: "I pause or slow external discussions to make sure internal colleagues are aligned on the direction before I proceed." }
@@ -1111,17 +1070,17 @@ const DIM_ORDER = ['D1', 'D2', 'D3', 'D4', 'D5'];
    ============================================ */
 const HEADLINES = {
   H01: "Your concession patterns may be training counterparties to apply pressure rather than trade with you.",
-  H02: "Your thorough preparation and firmness under pressure can limit your ability to respond when discussions take an unexpected turn.",
-  H03: "You invest in expanding what's available but your concession patterns give away more than you get in return.",
+  H02: "Your thorough preparation and firmness under pressure may limit your ability to respond when discussions take an unexpected turn.",
+  H03: "You invest in expanding what's available but your concession patterns suggest you give away more than you get in return.",
   H04: "Entering discussions without thorough preparation and then giving ground under pressure compounds the value gap on both sides.",
-  H05: "Your firmness under pressure and reluctance to concede creates deadlocks that often cost more than the concessions would.",
+  H05: "Your firmness under pressure and reluctance to concede may be creating deadlocks that cost more than the concessions would.",
   H06: "You focus on securing your share and hold firm under pressure, which protects your position but may close off opportunities that required more flexibility to reach.",
   H07: "You invest in expanding what's possible but tend to give ground when the other party pushes back, which can undo the value you've worked to create.",
   H08: "You close deals effectively but may underinvest in the internal alignment needed to make those agreements survive implementation.",
-  H09: "Your focus on internal alignment combined with a value-claiming orientation can read as cautious and difficult to do business with.",
+  H09: "Your focus on internal alignment combined with a value-claiming orientation may make you appear cautious and difficult to do business with.",
   H10: "Your instinct to create value would produce stronger results with more structured preparation on what the other party actually needs.",
   H11: "You prepare thoroughly but your behavior shifts under pressure in ways that can undo your preparation.",
-  H12: "Your profile shows relative balance across commercial behaviors. The real question is whether that balance holds when the stakes change."
+  H12: "Your profile shows relative balance across commercial behaviors. The risk for balanced profiles is inconsistency: look for the specific situations where your balance breaks down."
 };
 
 /* ============================================
@@ -1134,7 +1093,7 @@ const SUMMARIES = {
     HIGH: "You invest heavily in structured preparation. This gives you a strong foundation, but it may make you less responsive when the discussion reveals information your preparation didn't anticipate. Counterparties may experience you as scripted or rigid, particularly when they introduce issues or proposals outside the scope of what you prepared for."
   },
   D2: {
-    LOW: "Your approach focuses primarily on securing value for your side. This directness can be effective in straightforward transactions, but it may cause you to miss opportunities where both parties could have gained more. Over time, consistently zero-sum behavior trains counterparties to respond in kind. They stop bringing you options and start negotiating defensively.",
+    LOW: "Your approach focuses primarily on securing value for your side. This directness can be effective in straightforward transactions, but it may cause you to miss opportunities where both parties could have gained more. Over time, consistently zero-sum behavior trains counterparties to respond in kind, narrowing the space for creative outcomes.",
     MODERATE: "You show a working mix of value-creating and value-claiming behaviors. You explore expansion opportunities while also attending to your own outcomes. Watch for whether you shift toward claiming too early when discussions become contentious or time-pressured.",
     HIGH: "You invest significant energy in finding ways to expand what's available. This can unlock outcomes neither party anticipated, but it may leave you exposed to counterparties who are focused on claiming. The risk: your collaborative instincts get read as willingness to give, and the value you create gets captured by the other side."
   },
@@ -1144,14 +1103,14 @@ const SUMMARIES = {
     HIGH: "Under pressure, you hold firm or push back. This prevents pressure-induced concessions, but it can create unnecessary deadlocks and damage relationships that matter for long-term outcomes. Counterparties may stop engaging with you on substance because they see you as immovable, or they may escalate in response to your firmness."
   },
   D4: {
-    LOW: "Your concession patterns suggest you give ground without sufficient reciprocation. This trains counterparties to keep pushing rather than trading, because experience teaches them that waiting or applying pressure produces unilateral movement from you. Over time, they anchor their expectations to your willingness to move first and move alone.",
+    LOW: "Your concession patterns suggest you give ground without sufficient reciprocation. This can train counterparties to keep pushing rather than trading, because experience teaches them that waiting or applying pressure produces unilateral movement from you. The commercial cost compounds: counterparties anchor their expectations to your willingness to move first and move alone.",
     MODERATE: "You manage concessions with reasonable discipline, generally linking what you give to what you get. Look for the specific situations where this discipline breaks down. Common triggers: time pressure, high-value relationships, pressure to close, or when you're the one who needs the deal more.",
     HIGH: "You manage concessions tightly, consistently conditioning what you give on what you receive. This protects value, but it can also create friction and slow progress. There are situations where a well-placed unreciprocated concession would unlock more value than it costs, and your discipline may be preventing you from making those moves."
   },
   D5: {
     LOW: "Your energy goes primarily toward the party across the table. You may be underinvesting in internal alignment, which can produce agreements that look strong but fail during implementation. When internal stakeholders encounter terms they weren't consulted on, the rework, pushback, and political fallout often cost more than the value the original agreement created.",
     MODERATE: "You balance external deal dynamics with internal stakeholder management. You generally ensure you have support for the commitments you're making. Watch for situations where this balance slips: when pressure to close is high, when the deal feels too good to pause for internal consultation, or when internal politics feel like they're slowing you down.",
-    HIGH: "You invest heavily in internal alignment before and during commercial discussions. This reduces implementation risk, but it can also make you slow, conservative, or overly constrained in what you can propose. Counterparties may find you difficult to deal with if every discussion requires internal consultation before progress can be made, and the process itself can become a bottleneck that stalls deals without improving them."
+    HIGH: "You invest heavily in internal alignment before and during commercial discussions. This reduces implementation risk, but it may also make you slow, conservative, or overly constrained in what you can propose. Counterparties may find you difficult to deal with if every discussion requires internal consultation before progress can be made, and your internal focus may become a way to avoid the discomfort of external confrontation."
   }
 };
 
@@ -1174,7 +1133,7 @@ let responses = {};
 let scores = {};
 let bands = {};
 let selectedHeadlineId = '';
-let maxBodyHeight = 0;
+let heightFloor = 0;
 
 /* ============================================
    SCORING FUNCTIONS
@@ -1294,22 +1253,26 @@ function showScreen(screenId) {
    IFRAME HEIGHT REPORTING
    ============================================ */
 function reportHeight() {
-  if (!isIframe) return;
-  var h = document.body.scrollHeight;
-  // Grow-only during question flow AND results reveal (prevents shrink-then-grow jitter)
-  var assessmentActive = document.getElementById('screen-assessment').classList.contains('active');
-  var resultsActive = document.getElementById('screen-results').classList.contains('active');
-  if (assessmentActive || resultsActive) {
-    if (h > maxBodyHeight) maxBodyHeight = h;
-    h = maxBodyHeight;
-  } else {
-    maxBodyHeight = 0;
+  var h = Math.max(
+    document.body.offsetHeight,
+    document.body.scrollHeight
+  );
+  if (isIframe) {
+    // Grow-only: never shrink. Resets only on retake.
+    if (h > heightFloor) {
+      heightFloor = h;
+    } else {
+      h = heightFloor;
+    }
+    window.parent.postMessage({ type: 'ndna-height', height: h }, '*');
   }
-  window.parent.postMessage({ type: 'ndna-height', height: h }, '*');
 }
 
 // Report height periodically
-setInterval(reportHeight, 300);
+window.addEventListener('load', function() {
+  reportHeight();
+  setInterval(reportHeight, 300);
+});
 
 // Init message
 if (isIframe) {
@@ -1321,34 +1284,8 @@ if (isIframe) {
    ============================================ */
 document.getElementById('btn-start').addEventListener('click', function() {
   showScreen('screen-assessment');
-  setTimeout(function() {
-    lockQuestionHeight();
-    renderQuestion();
-  }, 350);
+  setTimeout(function() { renderQuestion(); }, 350);
 });
-
-// Pre-measure all questions and lock container to tallest
-function lockQuestionHeight() {
-  var qEl = document.getElementById('question-text');
-  // Create offscreen measurement clone matching question-text styles
-  var measure = document.createElement('p');
-  measure.className = 'question-text';
-  measure.style.position = 'absolute';
-  measure.style.visibility = 'hidden';
-  measure.style.top = '-9999px';
-  measure.style.width = qEl.offsetWidth + 'px';
-  document.body.appendChild(measure);
-
-  var maxH = 0;
-  ITEMS.forEach(function(item) {
-    measure.textContent = item.text;
-    var h = measure.offsetHeight;
-    if (h > maxH) maxH = h;
-  });
-
-  document.body.removeChild(measure);
-  qEl.style.minHeight = maxH + 'px';
-}
 
 // Set initial visibility
 setTimeout(function() {
@@ -1360,22 +1297,24 @@ setTimeout(function() {
    ============================================ */
 function renderQuestion() {
   var item = ITEMS[currentQuestion];
+  var qNum = currentQuestion + 1;
 
-  // Update progress counter and pips
-  document.getElementById('progress-number').innerHTML = (currentQuestion + 1) + '<span> /' + ITEMS.length + '</span>';
-  document.getElementById('progress-dim').textContent = DIMENSIONS[item.dim].name;
+  document.getElementById('progress-num').textContent = qNum;
+  document.getElementById('progress-dim-label').textContent = DIMENSIONS[item.dim] ? DIMENSIONS[item.dim].name : '';
 
-  var pipsHtml = '';
-  for (var i = 0; i < ITEMS.length; i++) {
-    var cls = 'progress-pip';
-    if (i > 0 && i % 5 === 0) cls += ' dim-gap';
-    if (i < currentQuestion) cls += ' done';
-    else if (i === currentQuestion) cls += ' active';
-    pipsHtml += '<div class="' + cls + '"></div>';
+  for (var g = 0; g < 3; g++) {
+    var group = document.getElementById('pip-group-' + g);
+    if (!group) continue;
+    group.innerHTML = '';
+    for (var p = 0; p < 5; p++) {
+      var pipIdx = g * 5 + p;
+      var pip = document.createElement('div');
+      pip.className = 'progress-pip' + (pipIdx < qNum ? ' active' : '');
+      group.appendChild(pip);
+    }
   }
-  document.getElementById('progress-pips').innerHTML = pipsHtml;
-  document.getElementById('progress-pips').setAttribute('aria-valuenow', currentQuestion + 1);
 
+  document.getElementById('progress-label').textContent = 'Question ' + qNum + ' of ' + ITEMS.length;
   document.getElementById('question-text').textContent = item.text;
 
   // Back button visibility
@@ -1502,7 +1441,7 @@ function buildChart() {
 
     // Calculate opacity based on distance from center
     var intensity = Math.min(Math.abs(pos) * 1.2, 1);
-    var fillOpacity = 0.55 + (intensity * 0.45);
+    var fillOpacity = 0.4 + (intensity * 0.6);
 
     var bandLabel = bands[dk];
     var directionLabel = pos < -0.15 ? dim.leftLabel : (pos > 0.15 ? dim.rightLabel : 'Balanced');
@@ -1518,9 +1457,9 @@ function buildChart() {
       '<div class="chart-bar-container">' +
         '<div class="chart-bar-track">' +
           '<div class="chart-bar-moderate-zone"></div>' +
+          '<div class="chart-bar-center-line"></div>' +
           '<div class="chart-bar-fill" style="left:50%;width:0%;opacity:' + fillOpacity + '"></div>' +
         '</div>' +
-        '<div class="chart-bar-center-line"></div>' +
         '<div class="chart-bar-marker" style="left:50%"></div>' +
       '</div>' +
       '<div class="chart-labels">' +
@@ -1614,53 +1553,54 @@ function buildCTA() {
 
   var dimLabel = CTA_DIM_LABELS[extremeDim];
   document.getElementById('cta-copy').textContent =
-    'Your strongest signal is in ' + dimLabel + '. If you want to understand what that pattern looks like from the other side of the table, that is a good place to start.';
+    'Your ' + dimLabel + ' patterns suggest specific commercial exposure. A 30-minute conversation would clarify what that means for your current priorities.';
 }
 
 /* ============================================
    EMAIL GATE LOGIC
    ============================================ */
 function revealFullResults(fromEmail) {
+  // Pre-measure: disable animations, expand everything, measure full height,
+  // send to parent BEFORE any content appears -- parent iframe is already sized.
+  if (isIframe && selectedHeadlineId !== 'H12') {
+    var noAnim = document.createElement('style');
+    noAnim.textContent = '* { animation: none !important; transition: none !important; }';
+    document.head.appendChild(noAnim);
+
+    var preSummaries = document.getElementById('summaries-section');
+    preSummaries.classList.add('revealed');
+    var preCards = preSummaries.querySelectorAll('.summary-card');
+    preCards.forEach(function(card) {
+      card.classList.add('visible', 'expanded');
+      var body = card.querySelector('.summary-body');
+      if (body) body.style.display = 'block';
+    });
+    document.getElementById('cta-section').classList.add('revealed');
+
+    void document.body.offsetHeight; // force sync layout
+    var fullHeight = Math.max(document.body.offsetHeight, document.body.scrollHeight) + 20;
+    heightFloor = fullHeight;
+    window.parent.postMessage({ type: 'ndna-height', height: heightFloor }, '*');
+
+    // Collapse back before real reveal
+    preCards.forEach(function(card) {
+      card.classList.remove('visible', 'expanded');
+      var body = card.querySelector('.summary-body');
+      if (body) body.style.display = '';
+    });
+    document.getElementById('cta-section').classList.remove('revealed');
+    preSummaries.classList.remove('revealed');
+    document.head.removeChild(noAnim);
+    void document.body.offsetHeight; // force layout before animations
+  }
+
   // Hide gate
   document.getElementById('gate-section').style.display = 'none';
 
   if (selectedHeadlineId === 'H12') {
-    // Show balanced block (already visible from buildSummaries), skip dimension summaries
     document.getElementById('cta-section').classList.add('revealed');
     reportHeight();
   } else {
-    // Pre-measure fully expanded height to prevent iframe jitter on card expand
-    if (isIframe) {
-      var preSummaries = document.getElementById('summaries-section');
-      preSummaries.classList.add('revealed');
-
-      // Temporarily disable transitions and expand all cards
-      var preCards = preSummaries.querySelectorAll('.summary-card');
-      preCards.forEach(function(card) {
-        card.style.transition = 'none';
-        card.classList.add('visible', 'expanded');
-        var body = card.querySelector('.summary-body');
-        if (body) body.style.display = 'block';
-      });
-      document.getElementById('cta-section').classList.add('revealed');
-
-      // Force reflow and measure
-      document.body.offsetHeight;
-      var preExpandedHeight = document.body.scrollHeight;
-      window.parent.postMessage({ type: 'ndna-height', height: preExpandedHeight }, '*');
-
-      // Collapse and reset all cards
-      preCards.forEach(function(card) {
-        card.classList.remove('visible', 'expanded');
-        var body = card.querySelector('.summary-body');
-        if (body) body.style.display = '';
-        card.style.transition = '';
-      });
-      document.getElementById('cta-section').classList.remove('revealed');
-      preSummaries.classList.remove('revealed');
-    }
-
-    // Now proceed with the normal staggered reveal
     var summariesSection = document.getElementById('summaries-section');
     summariesSection.classList.add('revealed');
     var cards = summariesSection.querySelectorAll('.summary-card');
@@ -1719,7 +1659,7 @@ document.getElementById('btn-retake').addEventListener('click', function() {
   scores = {};
   bands = {};
   selectedHeadlineId = '';
-  maxBodyHeight = 0;
+  heightFloor = 0;
 
   // Reset UI elements
   document.getElementById('gate-section').style.display = '';

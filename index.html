@@ -50,7 +50,7 @@ body {
   color: var(--text-body);
   background: var(--bg-dark);
   line-height: 1.6;
-  min-height: 680px;
+  min-height: 520px;
 }
 
 /* ============================================
@@ -67,7 +67,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 680px;
+  min-height: 520px;
   padding: 40px 20px;
 }
 
@@ -94,7 +94,7 @@ body {
 }
 
 .intro-body {
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   font-size: 1.125rem;
   color: var(--text-body);
   line-height: 1.7;
@@ -139,90 +139,50 @@ body {
    SCREEN 2: ASSESSMENT
    ============================================ */
 .assessment-container {
-  max-width: 720px;
+  max-width: 640px;
   width: 100%;
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 32px;
 }
 
 .progress-area {
-  margin-bottom: 36px;
+  margin-bottom: 48px;
 }
-.progress-topbar {
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  text-align: center;
-  margin-bottom: 16px;
-}
-.progress-counter {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-.progress-num {
-  font-family: var(--font-ui);
-  font-weight: 900;
-  font-size: 2.25rem;
-  color: var(--text-heading);
-  line-height: 1;
-}
-.progress-of {
+
+.progress-label {
   font-family: var(--font-ui);
   font-weight: 400;
   font-size: 0.8rem;
   color: var(--text-muted);
-}
-.progress-dim-label {
-  font-family: var(--font-ui);
-  font-weight: 400;
-  font-size: 0.75rem;
-  color: var(--text-muted);
   text-align: center;
-  letter-spacing: 0.03em;
-  margin-bottom: 14px;
-  min-height: 1.2em;
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
-.progress-pips {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-}
-.progress-pip-group {
-  display: flex;
-  gap: 4px;
-}
-.progress-pip {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+
+.progress-track {
+  width: 100%;
+  height: 3px;
   background: var(--border);
-  transition: background 0.2s ease;
+  border-radius: 2px;
+  overflow: hidden;
 }
-.progress-pip.active {
+
+.progress-fill {
+  height: 100%;
   background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }
-.progress-label { display: none; }
-.progress-track { display: none; }
-.progress-fill { display: none; }
 
 .question-area {
   text-align: center;
-  min-height: 260px;
+  min-height: 200px;
 }
 
 .question-text {
-  font-family: var(--font-ui);
-  font-size: 1.375rem;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
   color: #000000;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 40px;
   max-width: 520px;
   margin-left: auto;
@@ -271,7 +231,7 @@ body {
 }
 
 .back-btn {
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 0.9375rem;
   color: var(--text-muted);
@@ -341,7 +301,7 @@ body {
    SCREEN 4-6: RESULTS
    ============================================ */
 .results-container {
-  max-width: 720px;
+  max-width: 640px;
   width: 100%;
 }
 
@@ -349,7 +309,7 @@ body {
   background: var(--bg-card);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .results-header {
@@ -360,7 +320,7 @@ body {
 .results-label {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -369,7 +329,7 @@ body {
 
 .headline-text {
   font-family: var(--font-ui);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   color: var(--text-heading);
   line-height: 1.6;
   font-weight: 700;
@@ -393,7 +353,7 @@ body {
 .chart-dim-name {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--text-heading);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -471,7 +431,7 @@ body {
 .chart-label-right {
   font-family: var(--font-ui);
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-body);
   max-width: 45%;
   line-height: 1.3;
@@ -490,7 +450,7 @@ body {
 }
 
 .gate-prompt {
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   font-size: 1rem;
   color: var(--text-body);
   line-height: 1.6;
@@ -623,14 +583,14 @@ body {
 .summary-dim-name {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: var(--text-heading);
 }
 
 .summary-band-label {
   font-family: var(--font-ui);
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -659,7 +619,7 @@ body {
 
 .summary-copy {
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: 0.95rem;
   color: var(--text-body);
   line-height: 1.7;
 }
@@ -679,7 +639,7 @@ body {
 
 .balanced-copy {
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: 0.95rem;
   color: var(--text-body);
   line-height: 1.7;
 }
@@ -699,8 +659,8 @@ body {
 }
 
 .cta-primary-copy {
-  font-family: var(--font-ui);
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
   color: var(--text-body);
   line-height: 1.6;
   margin-bottom: 20px;
@@ -768,14 +728,12 @@ body {
 @media (max-width: 600px) {
   .screen.active {
     padding: 32px 16px;
-    min-height: 520px;
   }
-  body { min-height: 520px; }
-  .question-text { font-size: 1.125rem; }
-  .assessment-container { padding: 24px 16px; }
+
   .intro-headline {
     font-size: 1.6rem;
   }
+
   .intro-body {
     font-size: 1rem;
   }
@@ -810,12 +768,12 @@ body {
   }
 
   .headline-text {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
   }
 
   .chart-label-left,
   .chart-label-right {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 }
 
@@ -909,8 +867,8 @@ body {
      ============================================ -->
 <div id="screen-intro" class="screen active" role="main">
   <div class="intro-content">
-    <h1 class="intro-headline" id="intro-headline">Where do you leak value?</h1>
-    <p class="intro-body">Every commercial interaction reveals patterns. Some of those patterns create value. Others give it away. The problem is that predictable patterns are exploitable patterns, and most people cannot see their own.</p>
+    <h1 class="intro-headline" id="intro-headline">What are your negotiation patterns?</h1>
+    <p class="intro-body">Everyone who negotiates commercially has default patterns. How you prepare, how you handle pressure, how you make concessions, and how you balance the deal against internal stakeholders. This diagnostic maps yours across five dimensions so you can see what your counterparties already see.</p>
     <p class="intro-meta">15 questions. About 3 minutes. No right answers.</p>
     <button class="btn-primary" id="btn-start" aria-label="Begin the assessment">Begin</button>
   </div>
@@ -923,19 +881,10 @@ body {
   <div class="assessment-screen-inner">
     <div class="assessment-container">
       <div class="progress-area">
-        <div class="progress-topbar">Negotiation DNA &middot; Personal Profile</div>
-        <div class="progress-counter">
-          <span class="progress-num" id="progress-num">1</span>
-          <span class="progress-of">of 15</span>
+        <div class="progress-label" id="progress-label" aria-live="polite">Question 1 of 15</div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="1">
+          <div class="progress-fill" id="progress-fill" style="width: 6.67%"></div>
         </div>
-        <div class="progress-dim-label" id="progress-dim-label"></div>
-        <div class="progress-pips">
-          <div class="progress-pip-group" id="pip-group-0"></div>
-          <div class="progress-pip-group" id="pip-group-1"></div>
-          <div class="progress-pip-group" id="pip-group-2"></div>
-        </div>
-        <div id="progress-label" style="display:none" aria-live="polite"></div>
-        <div style="display:none"><div id="progress-fill"></div></div>
       </div>
       <div class="question-area">
         <p class="question-text" id="question-text"></p>
@@ -952,7 +901,7 @@ body {
      ============================================ -->
 <div id="screen-processing" class="screen" role="main" aria-label="Processing results">
   <div class="processing-content">
-    <p class="processing-text">Analyzing your behavioral patterns...</p>
+    <p class="processing-text">Building your profile...</p>
     <div class="processing-dots" aria-hidden="true">
       <div class="processing-dot"></div>
       <div class="processing-dot"></div>
@@ -980,7 +929,7 @@ body {
 
       <!-- Email Gate -->
       <div class="gate-section" id="gate-section">
-        <p class="gate-prompt">The chart shows where your patterns sit. What follows is what those patterns cost you, and where the specific exposure is for each dimension.</p>
+        <p class="gate-prompt">The chart above is the overview. The full breakdown shows what each dimension means in practice and where your specific patterns have the most commercial impact.</p>
         <form class="gate-form" id="gate-form" novalidate>
           <input type="email" class="gate-email-input" id="gate-email" placeholder="Email address" aria-label="Email address" required>
           <button type="submit" class="gate-submit-btn"><span class="gate-btn-label">Next step</span>Show Breakdown</button>
@@ -990,7 +939,7 @@ body {
 
       <!-- Balanced Profile Block (shown only for H12) -->
       <div class="balanced-block" id="balanced-block">
-        <p class="balanced-copy">Your profile shows no single dimension creating obvious exposure. Balanced profiles often mask situational inconsistency: the patterns may shift depending on the stakes, the counterparty, or the internal pressure you face. The diagnostic value for balanced profiles lies in identifying the specific conditions under which your balance breaks down.</p>
+        <p class="balanced-copy">No single dimension dominates your profile. That can mean genuine versatility, or it can mean your patterns shift depending on the situation, the stakes, or who you are dealing with. The question worth sitting with: do you choose when to flex, or does the situation choose for you?</p>
       </div>
 
       <!-- Dimension Summaries -->
@@ -1133,7 +1082,7 @@ let responses = {};
 let scores = {};
 let bands = {};
 let selectedHeadlineId = '';
-let heightFloor = 0;
+let maxBodyHeight = 0;
 
 /* ============================================
    SCORING FUNCTIONS
@@ -1253,26 +1202,20 @@ function showScreen(screenId) {
    IFRAME HEIGHT REPORTING
    ============================================ */
 function reportHeight() {
-  var h = Math.max(
-    document.body.offsetHeight,
-    document.body.scrollHeight
-  );
-  if (isIframe) {
-    // Grow-only: never shrink. Resets only on retake.
-    if (h > heightFloor) {
-      heightFloor = h;
-    } else {
-      h = heightFloor;
-    }
-    window.parent.postMessage({ type: 'ndna-height', height: h }, '*');
+  if (!isIframe) return;
+  var h = document.body.scrollHeight;
+  // Grow-only during question flow
+  if (document.getElementById('screen-assessment').classList.contains('active')) {
+    if (h > maxBodyHeight) maxBodyHeight = h;
+    h = maxBodyHeight;
+  } else {
+    maxBodyHeight = 0;
   }
+  window.parent.postMessage({ type: 'ndna-height', height: h }, '*');
 }
 
 // Report height periodically
-window.addEventListener('load', function() {
-  reportHeight();
-  setInterval(reportHeight, 300);
-});
+setInterval(reportHeight, 300);
 
 // Init message
 if (isIframe) {
@@ -1284,7 +1227,7 @@ if (isIframe) {
    ============================================ */
 document.getElementById('btn-start').addEventListener('click', function() {
   showScreen('screen-assessment');
-  setTimeout(function() { lockQuestionHeight(); renderQuestion(); }, 350);
+  setTimeout(function() { renderQuestion(); }, 350);
 });
 
 // Set initial visibility
@@ -1293,28 +1236,41 @@ setTimeout(function() {
 }, 50);
 
 /* ============================================
+   LOCK QUESTION HEIGHT (prevents card resize between questions)
+   ============================================ */
+function lockQuestionHeight() {
+  var qEl = document.getElementById('question-text');
+  var measure = document.createElement('p');
+  measure.className = 'question-text';
+  measure.style.position = 'absolute';
+  measure.style.visibility = 'hidden';
+  measure.style.top = '-9999px';
+  measure.style.width = qEl.offsetWidth + 'px';
+  document.body.appendChild(measure);
+
+  var maxH = 0;
+  ITEMS.forEach(function(item) {
+    measure.textContent = item.text;
+    var h = measure.offsetHeight;
+    if (h > maxH) maxH = h;
+  });
+
+  document.body.removeChild(measure);
+  qEl.style.minHeight = maxH + 'px';
+}
+
+lockQuestionHeight();
+
+/* ============================================
    SCREEN 2: ASSESSMENT
    ============================================ */
 function renderQuestion() {
   var item = ITEMS[currentQuestion];
-  var qNum = currentQuestion + 1;
+  var progressPct = ((currentQuestion + 1) / ITEMS.length) * 100;
 
-  document.getElementById('progress-num').textContent = qNum;
-  document.getElementById('progress-dim-label').textContent = DIMENSIONS[item.dim] ? DIMENSIONS[item.dim].name : '';
-
-  for (var g = 0; g < 3; g++) {
-    var group = document.getElementById('pip-group-' + g);
-    if (!group) continue;
-    group.innerHTML = '';
-    for (var p = 0; p < 5; p++) {
-      var pipIdx = g * 5 + p;
-      var pip = document.createElement('div');
-      pip.className = 'progress-pip' + (pipIdx < qNum ? ' active' : '');
-      group.appendChild(pip);
-    }
-  }
-
-  document.getElementById('progress-label').textContent = 'Question ' + qNum + ' of ' + ITEMS.length;
+  document.getElementById('progress-label').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + ITEMS.length;
+  document.getElementById('progress-fill').style.width = progressPct + '%';
+  document.querySelector('.progress-track').setAttribute('aria-valuenow', currentQuestion + 1);
   document.getElementById('question-text').textContent = item.text;
 
   // Back button visibility
@@ -1351,47 +1307,6 @@ function renderQuestion() {
   });
 
   reportHeight();
-}
-
-function lockQuestionHeight() {
-  // Render all questions invisibly, find tallest, lock question-area to that height.
-  // Prevents iframe resize between questions.
-  var area = document.querySelector('.question-area');
-  if (!area) return;
-  var savedQ = currentQuestion;
-  var maxH = 0;
-
-  // Temporarily make screen visible but off-screen for measurement
-  var screen = document.getElementById('screen-assessment');
-  var wasActive = screen.classList.contains('active');
-  screen.style.position = 'absolute';
-  screen.style.visibility = 'hidden';
-  screen.style.display = 'flex';
-
-  for (var i = 0; i < ITEMS.length; i++) {
-    currentQuestion = i;
-    var item = ITEMS[i];
-    document.getElementById('question-text').textContent = item.text;
-    var grid = document.getElementById('options-grid');
-    grid.innerHTML = '';
-    RESPONSE_OPTIONS.forEach(function(opt) {
-      var btn = document.createElement('button');
-      btn.className = 'option-btn';
-      btn.textContent = opt;
-      grid.appendChild(btn);
-    });
-    var h = area.offsetHeight;
-    if (h > maxH) maxH = h;
-  }
-
-  // Restore
-  screen.style.position = '';
-  screen.style.visibility = '';
-  if (!wasActive) screen.style.display = '';
-  currentQuestion = savedQ;
-
-  // Lock with a small buffer
-  area.style.minHeight = (maxH + 8) + 'px';
 }
 
 function selectOption(itemId, optionLabel, btnEl) {
@@ -1594,54 +1509,53 @@ function buildCTA() {
 
   var dimLabel = CTA_DIM_LABELS[extremeDim];
   document.getElementById('cta-copy').textContent =
-    'Your ' + dimLabel + ' patterns suggest specific commercial exposure. A 30-minute conversation would clarify what that means for your current priorities.';
+    'Your strongest signal is in ' + dimLabel + '. If you want to understand what that pattern looks like from the other side of the table, that is a good place to start.';
 }
 
 /* ============================================
    EMAIL GATE LOGIC
    ============================================ */
 function revealFullResults(fromEmail) {
-  // Pre-measure: disable animations, expand everything, measure full height,
-  // send to parent BEFORE any content appears -- parent iframe is already sized.
-  if (isIframe && selectedHeadlineId !== 'H12') {
-    var noAnim = document.createElement('style');
-    noAnim.textContent = '* { animation: none !important; transition: none !important; }';
-    document.head.appendChild(noAnim);
-
-    var preSummaries = document.getElementById('summaries-section');
-    preSummaries.classList.add('revealed');
-    var preCards = preSummaries.querySelectorAll('.summary-card');
-    preCards.forEach(function(card) {
-      card.classList.add('visible', 'expanded');
-      var body = card.querySelector('.summary-body');
-      if (body) body.style.display = 'block';
-    });
-    document.getElementById('cta-section').classList.add('revealed');
-
-    void document.body.offsetHeight; // force sync layout
-    var fullHeight = Math.max(document.body.offsetHeight, document.body.scrollHeight) + 20;
-    heightFloor = fullHeight;
-    window.parent.postMessage({ type: 'ndna-height', height: heightFloor }, '*');
-
-    // Collapse back before real reveal
-    preCards.forEach(function(card) {
-      card.classList.remove('visible', 'expanded');
-      var body = card.querySelector('.summary-body');
-      if (body) body.style.display = '';
-    });
-    document.getElementById('cta-section').classList.remove('revealed');
-    preSummaries.classList.remove('revealed');
-    document.head.removeChild(noAnim);
-    void document.body.offsetHeight; // force layout before animations
-  }
-
   // Hide gate
   document.getElementById('gate-section').style.display = 'none';
 
   if (selectedHeadlineId === 'H12') {
+    // Show balanced block (already visible from buildSummaries), skip dimension summaries
     document.getElementById('cta-section').classList.add('revealed');
     reportHeight();
   } else {
+    // Pre-measure fully expanded height to prevent iframe jitter on card expand
+    if (isIframe) {
+      var preSummaries = document.getElementById('summaries-section');
+      preSummaries.classList.add('revealed');
+
+      // Temporarily disable transitions and expand all cards
+      var preCards = preSummaries.querySelectorAll('.summary-card');
+      preCards.forEach(function(card) {
+        card.style.transition = 'none';
+        card.classList.add('visible', 'expanded');
+        var body = card.querySelector('.summary-body');
+        if (body) body.style.display = 'block';
+      });
+      document.getElementById('cta-section').classList.add('revealed');
+
+      // Force reflow and measure
+      document.body.offsetHeight;
+      var preExpandedHeight = document.body.scrollHeight;
+      window.parent.postMessage({ type: 'ndna-height', height: preExpandedHeight }, '*');
+
+      // Collapse and reset all cards
+      preCards.forEach(function(card) {
+        card.classList.remove('visible', 'expanded');
+        var body = card.querySelector('.summary-body');
+        if (body) body.style.display = '';
+        card.style.transition = '';
+      });
+      document.getElementById('cta-section').classList.remove('revealed');
+      preSummaries.classList.remove('revealed');
+    }
+
+    // Now proceed with the normal staggered reveal
     var summariesSection = document.getElementById('summaries-section');
     summariesSection.classList.add('revealed');
     var cards = summariesSection.querySelectorAll('.summary-card');
@@ -1700,7 +1614,7 @@ document.getElementById('btn-retake').addEventListener('click', function() {
   scores = {};
   bands = {};
   selectedHeadlineId = '';
-  heightFloor = 0;
+  maxBodyHeight = 0;
 
   // Reset UI elements
   document.getElementById('gate-section').style.display = '';

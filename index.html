@@ -605,15 +605,17 @@ body {
   margin-bottom: 20px;
 }
 .cta-btn {
-  display: inline-block;
+  display: block;
+  text-align: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 1rem;
   background: var(--brand);
   color: var(--white);
-  padding: 12px 24px;
+  padding: 16px 24px;
   border-radius: 5px;
   text-decoration: none;
+  letter-spacing: 0.02em;
   transition: background 0.2s;
 }
 .cta-btn:hover { background: var(--brand-dark); }
@@ -802,7 +804,7 @@ body.in-iframe #questions { min-height: 520px; }
 
     <div class="cta-section" id="ctaSection">
       <p class="cta-copy" id="ctaCopy"></p>
-      <a class="cta-btn" href="/connect" target="_top">Start a conversation</a>
+      <a class="cta-btn" href="https://areteadvisors.pro/connect" target="_top">Start a conversation</a>
     </div>
 
     <div class="retake-wrap">
@@ -1223,6 +1225,8 @@ body.in-iframe #questions { min-height: 520px; }
       var score = scores[dimId];
       var pos = (score - 7.5) / 4.5; // -1 to +1
       var pct = (pos + 1) / 2 * 100; // 0 to 100
+      // Clamp so marker dot (14px) never extends outside bar container
+      var markerPct = Math.max(1.5, Math.min(98.5, pct));
 
       var row = document.createElement('div');
       row.className = 'chart-row';
@@ -1275,7 +1279,7 @@ body.in-iframe #questions { min-height: 520px; }
       elChartSection.appendChild(row);
 
       // Animate after a frame
-      (function(fill, marker, pct, pos) {
+      (function(fill, marker, pct, markerPct, pos) {
         requestAnimationFrame(function() {
           requestAnimationFrame(function() {
             if (pct >= 50) {
@@ -1285,10 +1289,10 @@ body.in-iframe #questions { min-height: 520px; }
               fill.style.left = pct + '%';
               fill.style.width = (50 - pct) + '%';
             }
-            marker.style.left = pct + '%';
+            marker.style.left = markerPct + '%';
           });
         });
-      })(fill, marker, pct, pos);
+      })(fill, marker, pct, markerPct, pos);
     }
   }
 

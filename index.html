@@ -356,9 +356,9 @@ body {
 .results-headline {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   color: var(--text-heading);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Bar chart */
@@ -368,7 +368,7 @@ body {
 .chart-dim-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.9375rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-primary);
@@ -434,7 +434,7 @@ body {
 .chart-label {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: var(--text-body);
   max-width: 45%;
 }
@@ -448,7 +448,7 @@ body {
 .gate-prompt {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.0625rem;
   color: var(--text-body);
   line-height: 1.6;
   margin-bottom: 20px;
@@ -553,14 +553,14 @@ body {
 .summary-dim-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.0625rem;
   color: #000;
   margin-bottom: 2px;
 }
 .summary-band-label {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--text-secondary);
   text-transform: uppercase;
 }
@@ -1027,8 +1027,8 @@ body.in-iframe #questions { min-height: 520px; }
     }
     document.getElementById(id).classList.add('active');
     elProgressBar.classList.toggle('visible', id === 'questions');
-    // Reset height floor for short screens so iframe can shrink
-    if (id === 'intro' || id === 'loading') {
+    // Reset height floor for intro so iframe can shrink on retake
+    if (id === 'intro') {
       heightFloor = 0;
     }
     window.scrollTo(0, 0);

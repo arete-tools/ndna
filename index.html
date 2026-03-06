@@ -954,7 +954,9 @@ body.in-iframe #questions { min-height: 520px; }
   var heightFloor = 0;
 
   function postHeight() {
-    var h = Math.max(document.body.offsetHeight, document.body.scrollHeight);
+    var el = document.querySelector('.wrap');
+    void document.body.offsetHeight; // force sync reflow
+    var h = Math.max(el ? el.offsetHeight : 0, document.body.scrollHeight);
     if (isIframe) {
       if (h > heightFloor) {
         heightFloor = h;
@@ -970,6 +972,10 @@ body.in-iframe #questions { min-height: 520px; }
   if (isIframe) {
     document.body.classList.add('in-iframe');
     document.body.style.minHeight = 'auto';
+    // Override 100vh min-heights that cause feedback loop in iframe context
+    var iframeStyle = document.createElement('style');
+    iframeStyle.textContent = '#intro, #questions { min-height: auto !important; } #questions { min-height: 520px !important; }';
+    document.head.appendChild(iframeStyle);
     try {
       window.parent.postMessage({ type: 'ndna-init', transition: 'height 0.3s ease' }, '*');
     } catch (e) {}
